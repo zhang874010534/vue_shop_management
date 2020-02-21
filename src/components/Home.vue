@@ -22,7 +22,7 @@
           :default-active="this.$route.path.split('/')[2]"
           router
         >
-          <el-submenu :index="item.id.toString()" v-for="item in menuList" :key="item.id">
+        <el-submenu :index="item.id.toString()" v-for="item in menuList" :key="item.id">
             <template slot="title">
               <i :class="iconList[item.id]"></i>
               <span>{{item.authName}}</span>

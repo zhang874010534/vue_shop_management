@@ -17,6 +17,30 @@
           <el-button type="primary">添加用户</el-button>
         </el-col>
       </el-row>
+      <!-- table列表 -->
+      <el-table :data="userList" style="width: 100%" border stripe>
+        <el-table-column type="index" label="#"></el-table-column>
+        <el-table-column prop="username" label="姓名"></el-table-column>
+        <el-table-column prop="email" label="邮箱"></el-table-column>
+        <el-table-column prop="mobile" label="电话"></el-table-column>
+        <el-table-column prop="role_name" label="角色"></el-table-column>
+        <el-table-column label="状态">
+          <template v-slot="scope">
+            <el-tooltip :content="scope.row.mg_state?'特二神':'电电狗'" placement="top">
+              <!-- active-value改变的值就是v-model绑定的这个值active-value="100"
+              inactive-value="0"-->
+              <el-switch
+                v-model="scope.row.mg_state"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+              ></el-switch>
+            </el-tooltip>
+            <!-- 这个也就是userList里每一项的mg_state -->
+            {{scope.row.mg_state}}
+          </template>
+        </el-table-column>
+        <el-table-column label="操作"></el-table-column>
+      </el-table>
     </el-card>
   </div>
 </template>
@@ -28,7 +52,10 @@ export default {
         query: '',
         pagenum: 1,
         pagesize: 2
-      }
+      },
+      userList: [],
+      total: 0,
+      value: '100'
     }
   },
   created() {
@@ -39,7 +66,8 @@ export default {
       var { data: res } = await this.$axios.get('users', {
         params: this.params
       })
-      console.log(res)
+      this.userList = res.data.users
+      this.total = res.data.total
     }
   }
 }
