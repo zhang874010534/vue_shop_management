@@ -53,7 +53,8 @@ export default {
         pagenum: 1,
         pagesize: 4
       },
-      userList: [
+      userList: [],
+      res: [
         {
           id: 500,
           role_name: '超级管理员',
@@ -100,9 +101,10 @@ export default {
   },
   methods: {
     async getUserList() {
-      var { data: res } = await this.$axios.get('users', {
-        params: this.params
-      })
+      // var { data: res } = await this.$axios.get('users', {
+      //   params: this.params
+      // })
+      var res = this.res
       this.userList = res.data.users
       this.total = res.data.total
     }
