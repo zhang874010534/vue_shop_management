@@ -21,7 +21,28 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      params: {
+        query: '',
+        pagenum: 1,
+        pagesize: 2
+      }
+    }
+  },
+  created() {
+    this.getUserList()
+  },
+  methods: {
+    async getUserList() {
+      var { data: res } = await this.$axios.get('users', {
+        params: this.params
+      })
+      console.log(res)
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 </style>

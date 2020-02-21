@@ -30,7 +30,7 @@ export default {
     return {
       form: {
         username: 'admin',
-        password: '123456'
+        password: ''
       },
       loginRules: {
         username: [
@@ -41,6 +41,28 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
         ]
+      },
+      successRes: {
+        data: {
+          id: 500,
+          rid: 0,
+          username: 'admin',
+          mobile: '12345678',
+          email: 'adsfad@qq.com',
+          token:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE1ODIyNjU2ODEsImV4cCI6MTU4MjM1MjA4MX0.U_t2D9tEpS8DRVqDPe4qGjJrnVohIefzeszq5xMwlIg'
+        },
+        meta: {
+          msg: '登录成功',
+          status: 200
+        }
+      },
+      errorRes: {
+        data: null,
+        meta: {
+          msg: '密码错误',
+          status: 400
+        }
       }
     }
   },
@@ -52,7 +74,14 @@ export default {
     login() {
       this.$refs.form.validate(async flag => {
         if (!flag) return
-        var { data } = await this.$axios.post('login', this.form)
+        // 这是带服务器的请求
+        // var { data } = await this.$axios.post('login', this.form)
+        var data
+        if (this.form.username === 'admin' && this.form.password === '123456') {
+          data = this.successRes
+        } else {
+          data = this.errorRes
+        }
         if (data.meta.status !== 200) return this.$message.error('登录失败')
         this.$message({
           message: '登录成功',
