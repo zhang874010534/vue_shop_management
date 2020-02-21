@@ -51,9 +51,46 @@ export default {
       params: {
         query: '',
         pagenum: 1,
-        pagesize: 2
+        pagesize: 4
       },
-      userList: [],
+      userList: [
+        {
+          id: 500,
+          role_name: '超级管理员',
+          username: 'admin',
+          create_time: 1486720211,
+          mobile: '12345678',
+          email: 'adsfad@qq.com',
+          mg_state: true
+        },
+        {
+          id: 502,
+          role_name: '测试角色2',
+          username: 'linken',
+          create_time: 1486720211,
+          mobile: '1213213123',
+          email: 'asdf@qq.com',
+          mg_state: false
+        },
+        {
+          id: 508,
+          role_name: '主管',
+          username: 'asdf1',
+          create_time: 1511853015,
+          mobile: '123123',
+          email: 'adfsa@qq.com',
+          mg_state: true
+        },
+        {
+          id: 509,
+          role_name: 'test',
+          username: 'asdf123',
+          create_time: 1511853353,
+          mobile: '1111',
+          email: 'asdf@qq.com',
+          mg_state: false
+        }
+      ],
       total: 0,
       value: '100'
     }
