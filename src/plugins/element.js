@@ -20,9 +20,10 @@ import {
   Table,
   TableColumn,
   Tooltip,
-  Switch
+  Switch,
+  Pagination,
+  Dialog
 } from 'element-ui'
-
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
@@ -45,3 +46,5 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Tooltip)
 Vue.use(Switch)
+Vue.use(Pagination)
+Vue.use(Dialog)

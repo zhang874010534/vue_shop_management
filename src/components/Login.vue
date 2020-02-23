@@ -50,7 +50,7 @@ export default {
           mobile: '12345678',
           email: 'adsfad@qq.com',
           token:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE1ODIyNjU2ODEsImV4cCI6MTU4MjM1MjA4MX0.U_t2D9tEpS8DRVqDPe4qGjJrnVohIefzeszq5xMwlIg'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE1ODI0Mzk1NzcsImV4cCI6MTU4MjUyNTk3N30.bCkeltLDN0jbwOUB6cfbcOABqzCnttob4D1XvldOZHA'
         },
         meta: {
           msg: '登录成功',
