@@ -10,6 +10,7 @@ axios.interceptors.request.use((config) => {
   config.headers.Authorization = sessionStorage.getItem('token')
   return config
 })
+
 Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false

@@ -19,10 +19,11 @@
             <el-button slot="append" icon="el-icon-search" @click="searchGetUserList"></el-button>
           </el-input>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="4778750">
           <el-button type="primary" @click="dialogVisible=true">添加用户</el-button>
         </el-col>
       </el-row>
+
       <!-- table列表 -->
       <el-table :data="userList" style="width: 100%" border stripe>
         <el-table-column type="index" label="#"></el-table-column>
@@ -41,16 +42,29 @@
             {{scope.row.mg_state}}
           </template>
         </el-table-column>
+
         <el-table-column label="操作">
-          <template>
-            <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
-            <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
-            <el-tooltip content="分配角色" placement="top">
+          <template v-slot="scope">
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              class="operateColumnButton"
+              @click="showEditDialog(scope.row)"
+            ></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              @click="delUser(scope.row.id)"
+            ></el-button>
+            <el-tooltip content="分配角色" placement="top" :enterable="false">
               <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
+
       <!-- 分页区域 -->
       <el-pagination
         @size-change="handleSizeChange"
@@ -62,10 +76,11 @@
         :total="total"
       ></el-pagination>
     </el-card>
+
     <!-- 添加用户对话框 -->
-    <el-dialog title="添加用户" :visible.sync="dialogVisible" width="50%">
+    <el-dialog title="添加用户" :visible.sync="dialogVisible" width="50%" @close="resetDialogForm">
       <!-- 添加用户表单区域 -->
-      <el-form :model="addUserForm" :rules="userRules" ref="addRuleForm" label-width="70px">
+      <el-form :model="addUserForm" :rules="userRules" ref="addUserForm" label-width="70px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="addUserForm.username"></el-input>
         </el-form-item>
@@ -81,7 +96,26 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="addUserSubmit">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 修改用户对话框 -->
+    <el-dialog title="修改用户" :visible.sync="editDialogVisible" width="50%">
+      <el-form :model="editUserForm" :rules="userRules" ref="editUserForm" label-width="80px">
+        <el-form-item label="用户名">
+          <el-input v-model="editUserForm.username" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="editUserForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号" prop="mobile">
+          <el-input v-model="editUserForm.mobile"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="editDialogVisible= false">取 消</el-button>
+        <el-button type="primary" @click="editUserFormSubmit">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -89,6 +123,22 @@
 <script>
 export default {
   data() {
+    // 验证邮箱的自定义规则
+    // var checkEmail=(rule,value,callback)=>{
+    //   const regEmail=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)$/
+    //   if(regEmail.test(value)){
+    //     return callback()
+    //   }
+    //   callback(new Error('请输入合法的邮箱'))
+    // }
+    // 验证手机的自定义规则
+    // var checkMobile = (rule, value, callback) => {
+    //   const regMobile = /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/
+    //   if (regMobile.test(value)) {
+    //     return callback()
+    //   }
+    //   callback(new Error('请输入合法的手机号'))
+    // }
     return {
       params: {
         query: '',
@@ -205,7 +255,6 @@ export default {
           { min: 6, max: 15, message: '密码在 6 到 15 个字符', trigger: 'blur' }
         ],
         email: [
-          { required: true, message: '请输入邮箱', trigger: 'blur' },
           {
             type: 'email',
             message: '请输入正确的邮箱',
@@ -213,10 +262,17 @@ export default {
           }
         ],
         mobile: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { type: 'number', message: '请输入11位的手机号', trigger: 'blur' }
+          {
+            pattern: /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/,
+            message: '手机号错误',
+            trigger: 'blur'
+          }
         ]
-      }
+      },
+      // 修改对话框显示和隐藏
+      editDialogVisible: false,
+      // 修改时候的form
+      editUserForm: {}
     }
   },
   created() {
@@ -227,7 +283,7 @@ export default {
       var { data: res } = await this.$axios.get('users', {
         params: this.params
       })
-
+      console.log(res)
       // var res = this.res
       this.userList = res.data.users
       this.total = res.data.total
@@ -252,6 +308,7 @@ export default {
         userInfo.row.mg_state = !userInfo.row.mg_state
         return this.$message.error('更新状态失败')
       }
+
       this.$message({
         type: 'success',
         message: '更新状态成功'
@@ -260,9 +317,87 @@ export default {
     searchGetUserList() {
       this.params.pagenum = 1
       this.getUserList()
+    },
+    resetDialogForm() {
+      this.$refs.addUserForm.resetFields()
+    },
+    // 添加用户提交
+    addUserSubmit() {
+      // 校验
+      this.$refs.addUserForm.validate(async valid => {
+        if (!valid) return this.$message.error('添加失败')
+        var { data: res } = await this.$axios.post('users', this.addUserForm)
+        if (res.meta.status !== 201) return this.$message.error(res.meta.msg)
+
+        this.$message({
+          message: '添加成功',
+          type: 'success',
+          showClose: true
+        })
+        this.dialogVisible = false
+        // 重新调用数据
+        this.getUserList()
+      })
+    },
+    // 展示修改用户对话框
+    showEditDialog(row) {
+      this.editDialogVisible = true
+      this.editUserForm = row
+    },
+    //修改用户 提交
+    editUserFormSubmit() {
+      this.$refs.editUserForm.validate(async valid => {
+        if (!valid) return this.$message.error('修改错误')
+        let form = {
+          id: this.editUserForm.id,
+          email: this.editUserForm.email,
+          mobile: this.editUserForm.mobile
+        }
+        var { data: res } = await this.$axios.put(
+          `users/${this.editUserForm.id}`,
+          form
+        )
+        if (res.meta.status !== 200) return this.$message.error('提交失败')
+        // 关闭form
+        this.editDialogVisible = false
+        this.$message.success('修改成功')
+        // 通过直接修改前端的数据而不是请求 可以减少一次请求次数
+        this.userList.some((item, index) => {
+          if (item.id === res.data.id) {
+            item = res.data
+            return true
+          }
+        })
+      })
+    },
+    //删除用户
+    delUser(id) {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async () => {
+          var { data: res } = await this.$axios.delete('users/' + id)
+          if (res.meta.status !== 200) return this.$message.error('删除失败')
+          this.$message.success('删除成功')
+          this.getUserList()
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
     }
   }
 }
 </script>
 <style lang="less" scoped>
+.operateColumnButton {
+  margin-left: 10px !important;
+}
+.el-button {
+  margin-top: 5px;
+}
 </style>

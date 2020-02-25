@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    '@vue/standard'
+    // '@vue/standard'
   ],
   parserOptions: {
     parser: 'babel-eslint'
@@ -13,8 +13,8 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-trailing-spaces':'off',
-    'quotes':'off',
-    'space-before-function-paren':'off'
+    'no-trailing-spaces': 'off',
+    'quotes': 'off',
+    'space-before-function-paren': 'off'
   }
 }
