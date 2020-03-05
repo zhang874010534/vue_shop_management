@@ -5,12 +5,18 @@ body {
     padding: 0;
     min-width: 1366px;
 }
-.el-breadcrumb{
+
+.el-breadcrumb {
     margin-bottom: 15px;
 }
-.el-table{
+
+.el-table {
     margin-top: 15px;
 }
-.el-pagination{
+
+.el-pagination {
     margin-top: 15px;
+}
+.el-cascader-panel {
+    height: 200px;
 }

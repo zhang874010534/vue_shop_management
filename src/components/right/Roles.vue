@@ -94,9 +94,779 @@
 export default {
   data() {
     return {
-      roleList: [],
+      roleList: [
+        {
+          id: 30,
+          roleName: '主管',
+          roleDesc: '技术负责人',
+          children: [
+            {
+              id: 101,
+              authName: '商品管理',
+              path: 'goods',
+              children: [
+                {
+                  id: 104,
+                  authName: '商品列表',
+                  path: 'goods',
+                  children: [
+                    {
+                      id: 105,
+                      authName: '添加商品',
+                      path: 'goods'
+                    },
+                    {
+                      id: 116,
+                      authName: '商品修改',
+                      path: 'goods'
+                    },
+                    {
+                      id: 117,
+                      authName: '商品删除',
+                      path: 'goods'
+                    },
+                    {
+                      id: 150,
+                      authName: '更新商品图片',
+                      path: 'goods'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 102,
+              authName: '订单管理',
+              path: 'orders',
+              children: [
+                {
+                  id: 107,
+                  authName: '订单列表',
+                  path: 'orders',
+                  children: [
+                    {
+                      id: 109,
+                      authName: '添加订单',
+                      path: 'orders'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 103,
+              authName: '权限管理',
+              path: 'rights',
+              children: [
+                {
+                  id: 112,
+                  authName: '权限列表',
+                  path: 'rights',
+                  children: [
+                    {
+                      id: 147,
+                      authName: '查看权限',
+                      path: 'rights'
+                    }
+                  ]
+                },
+                {
+                  id: 111,
+                  authName: '角色列表',
+                  path: 'roles',
+                  children: [
+                    {
+                      id: 129,
+                      authName: '添加角色',
+                      path: 'roles'
+                    },
+                    {
+                      id: 130,
+                      authName: '删除角色',
+                      path: 'roles'
+                    },
+                    {
+                      id: 135,
+                      authName: '取消角色授权',
+                      path: 'roles'
+                    },
+                    {
+                      id: 138,
+                      authName: '获取角色列表',
+                      path: 'roles'
+                    },
+                    {
+                      id: 139,
+                      authName: '获取角色详情',
+                      path: 'roles'
+                    },
+                    {
+                      id: 140,
+                      authName: '更新角色信息',
+                      path: 'roles'
+                    },
+                    {
+                      id: 141,
+                      authName: '更新角色权限',
+                      path: 'roles'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 125,
+              authName: '用户管理',
+              path: 'users',
+              children: [
+                {
+                  id: 110,
+                  authName: '用户列表',
+                  path: 'users',
+                  children: [
+                    {
+                      id: 131,
+                      authName: '添加用户',
+                      path: 'users'
+                    },
+                    {
+                      id: 132,
+                      authName: '删除用户',
+                      path: 'users'
+                    },
+                    {
+                      id: 133,
+                      authName: '更新用户',
+                      path: 'users'
+                    },
+                    {
+                      id: 136,
+                      authName: '获取用户详情',
+                      path: 'users'
+                    },
+                    {
+                      id: 137,
+                      authName: '分配用户角色',
+                      path: 'users'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 145,
+              authName: '数据统计',
+              path: 'reports',
+              children: [
+                {
+                  id: 146,
+                  authName: '数据报表',
+                  path: 'reports',
+                  children: [
+                    {
+                      id: 148,
+                      authName: '查看数据',
+                      path: 'reports'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 31,
+          roleName: '测试角色',
+          roleDesc: '测试角色描述',
+          children: [
+            {
+              id: 101,
+              authName: '商品管理',
+              path: 'goods',
+              children: [
+                {
+                  id: 115,
+                  authName: '分类参数',
+                  path: 'params',
+                  children: [
+                    {
+                      id: 142,
+                      authName: '获取参数列表',
+                      path: 'categories'
+                    },
+                    {
+                      id: 143,
+                      authName: '创建商品参数',
+                      path: 'categories'
+                    },
+                    {
+                      id: 144,
+                      authName: '删除商品参数',
+                      path: 'categories'
+                    }
+                  ]
+                },
+                {
+                  id: 121,
+                  authName: '商品分类',
+                  path: 'categories',
+                  children: [
+                    {
+                      id: 122,
+                      authName: '添加分类',
+                      path: 'categories'
+                    },
+                    {
+                      id: 123,
+                      authName: '删除分类',
+                      path: 'categories'
+                    },
+                    {
+                      id: 149,
+                      authName: '获取分类详情',
+                      path: 'categories'
+                    }
+                  ]
+                },
+                {
+                  id: 104,
+                  authName: '商品列表',
+                  path: 'goods',
+                  children: [
+                    {
+                      id: 105,
+                      authName: '添加商品',
+                      path: 'goods'
+                    },
+                    {
+                      id: 116,
+                      authName: '商品修改',
+                      path: 'goods'
+                    },
+                    {
+                      id: 117,
+                      authName: '商品删除',
+                      path: 'goods'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 102,
+              authName: '订单管理',
+              path: 'orders',
+              children: [
+                {
+                  id: 107,
+                  authName: '订单列表',
+                  path: 'orders',
+                  children: [
+                    {
+                      id: 109,
+                      authName: '添加订单',
+                      path: 'orders'
+                    },
+                    {
+                      id: 154,
+                      authName: '订单更新',
+                      path: 'orders'
+                    },
+                    {
+                      id: 155,
+                      authName: '获取订单详情',
+                      path: 'orders'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 34,
+          roleName: '测试角色2',
+          roleDesc: '测试描述12',
+          children: [
+            {
+              id: 101,
+              authName: '商品管理',
+              path: 'goods',
+              children: [
+                {
+                  id: 104,
+                  authName: '商品列表',
+                  path: 'goods',
+                  children: [
+                    {
+                      id: 105,
+                      authName: '添加商品',
+                      path: 'goods'
+                    },
+                    {
+                      id: 116,
+                      authName: '商品修改',
+                      path: 'goods'
+                    },
+                    {
+                      id: 117,
+                      authName: '商品删除',
+                      path: 'goods'
+                    }
+                  ]
+                },
+                {
+                  id: 115,
+                  authName: '分类参数',
+                  path: 'params',
+                  children: [
+                    {
+                      id: 142,
+                      authName: '获取参数列表',
+                      path: 'categories'
+                    },
+                    {
+                      id: 144,
+                      authName: '删除商品参数',
+                      path: 'categories'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 103,
+              authName: '权限管理',
+              path: 'rights',
+              children: [
+                {
+                  id: 111,
+                  authName: '角色列表',
+                  path: 'roles',
+                  children: [
+                    {
+                      id: 129,
+                      authName: '添加角色',
+                      path: 'roles'
+                    },
+                    {
+                      id: 130,
+                      authName: '删除角色',
+                      path: 'roles'
+                    },
+                    {
+                      id: 134,
+                      authName: '角色授权',
+                      path: 'roles'
+                    },
+                    {
+                      id: 135,
+                      authName: '取消角色授权',
+                      path: 'roles'
+                    },
+                    {
+                      id: 138,
+                      authName: '获取角色列表',
+                      path: 'roles'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 39,
+          roleName: '大发送到',
+          roleDesc: '阿斯蒂芬',
+          children: [
+            {
+              id: 101,
+              authName: '商品管理',
+              path: 'goods',
+              children: [
+                {
+                  id: 104,
+                  authName: '商品列表',
+                  path: 'goods',
+                  children: [
+                    {
+                      id: 105,
+                      authName: '添加商品',
+                      path: 'goods'
+                    },
+                    {
+                      id: 116,
+                      authName: '商品修改',
+                      path: 'goods'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 40,
+          roleName: 'test',
+          roleDesc: 'test',
+          children: [
+            {
+              id: 102,
+              authName: '订单管理',
+              path: 'orders',
+              children: [
+                {
+                  id: 107,
+                  authName: '订单列表',
+                  path: 'orders',
+                  children: [
+                    {
+                      id: 109,
+                      authName: '添加订单',
+                      path: 'orders'
+                    },
+                    {
+                      id: 154,
+                      authName: '订单更新',
+                      path: 'orders'
+                    },
+                    {
+                      id: 155,
+                      authName: '获取订单详情',
+                      path: 'orders'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 145,
+              authName: '数据统计',
+              path: 'reports',
+              children: [
+                {
+                  id: 146,
+                  authName: '数据报表',
+                  path: 'reports',
+                  children: [
+                    {
+                      id: 148,
+                      authName: '查看数据',
+                      path: 'reports'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 41,
+          roleName: 'dsdf',
+          roleDesc: 'sf ',
+          children: []
+        }
+      ],
       assignRightDialog: false,
-      rightsList: [],
+      rightsList: [
+        {
+          id: 101,
+          authName: '商品管理',
+          path: 'goods',
+          pid: 0,
+          children: [
+            {
+              id: 104,
+              authName: '商品列表',
+              path: 'goods',
+              pid: 101,
+              children: [
+                {
+                  id: 105,
+                  authName: '添加商品',
+                  path: 'goods',
+                  pid: '104,101'
+                },
+                {
+                  id: 116,
+                  authName: '商品修改',
+                  path: 'goods',
+                  pid: '104,101'
+                },
+                {
+                  id: 117,
+                  authName: '商品删除',
+                  path: 'goods',
+                  pid: '104,101'
+                },
+                {
+                  id: 150,
+                  authName: '更新商品图片',
+                  path: 'goods',
+                  pid: '104,101'
+                },
+                {
+                  id: 151,
+                  authName: '更新商品属性',
+                  path: 'goods',
+                  pid: '104,101'
+                },
+                {
+                  id: 152,
+                  authName: '更新商品状态',
+                  path: 'goods',
+                  pid: '104,101'
+                },
+                {
+                  id: 153,
+                  authName: '获取商品详情',
+                  path: 'goods',
+                  pid: '104,101'
+                }
+              ]
+            },
+            {
+              id: 115,
+              authName: '分类参数',
+              path: 'params',
+              pid: 101,
+              children: [
+                {
+                  id: 142,
+                  authName: '获取参数列表',
+                  path: 'categories',
+                  pid: '115,101'
+                },
+                {
+                  id: 143,
+                  authName: '创建商品参数',
+                  path: 'categories',
+                  pid: '115,101'
+                },
+                {
+                  id: 144,
+                  authName: '删除商品参数',
+                  path: 'categories',
+                  pid: '115,101'
+                }
+              ]
+            },
+            {
+              id: 121,
+              authName: '商品分类',
+              path: 'categories',
+              pid: 101,
+              children: [
+                {
+                  id: 122,
+                  authName: '添加分类',
+                  path: 'categories',
+                  pid: '121,101'
+                },
+                {
+                  id: 123,
+                  authName: '删除分类',
+                  path: 'categories',
+                  pid: '121,101'
+                },
+                {
+                  id: 149,
+                  authName: '获取分类详情',
+                  path: 'categories',
+                  pid: '121,101'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 102,
+          authName: '订单管理',
+          path: 'orders',
+          pid: 0,
+          children: [
+            {
+              id: 107,
+              authName: '订单列表',
+              path: 'orders',
+              pid: 102,
+              children: [
+                {
+                  id: 109,
+                  authName: '添加订单',
+                  path: 'orders',
+                  pid: '107,102'
+                },
+                {
+                  id: 154,
+                  authName: '订单更新',
+                  path: 'orders',
+                  pid: '107,102'
+                },
+                {
+                  id: 155,
+                  authName: '获取订单详情',
+                  path: 'orders',
+                  pid: '107,102'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 103,
+          authName: '权限管理',
+          path: 'rights',
+          pid: 0,
+          children: [
+            {
+              id: 111,
+              authName: '角色列表',
+              path: 'roles',
+              pid: 103,
+              children: [
+                {
+                  id: 129,
+                  authName: '添加角色',
+                  path: 'roles',
+                  pid: '111,103'
+                },
+                {
+                  id: 130,
+                  authName: '删除角色',
+                  path: 'roles',
+                  pid: '111,103'
+                },
+                {
+                  id: 134,
+                  authName: '角色授权',
+                  path: 'roles',
+                  pid: '111,103'
+                },
+                {
+                  id: 135,
+                  authName: '取消角色授权',
+                  path: 'roles',
+                  pid: '111,103'
+                },
+                {
+                  id: 138,
+                  authName: '获取角色列表',
+                  path: 'roles',
+                  pid: '111,103'
+                },
+                {
+                  id: 139,
+                  authName: '获取角色详情',
+                  path: 'roles',
+                  pid: '111,103'
+                },
+                {
+                  id: 140,
+                  authName: '更新角色信息',
+                  path: 'roles',
+                  pid: '111,103'
+                },
+                {
+                  id: 141,
+                  authName: '更新角色权限',
+                  path: 'roles',
+                  pid: '111,103'
+                }
+              ]
+            },
+            {
+              id: 112,
+              authName: '权限列表',
+              path: 'rights',
+              pid: 103,
+              children: [
+                {
+                  id: 147,
+                  authName: '查看权限',
+                  path: 'rights',
+                  pid: '112,103'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 125,
+          authName: '用户管理',
+          path: 'users',
+          pid: 0,
+          children: [
+            {
+              id: 110,
+              authName: '用户列表',
+              path: 'users',
+              pid: 125,
+              children: [
+                {
+                  id: 131,
+                  authName: '添加用户',
+                  path: 'users',
+                  pid: '110,125'
+                },
+                {
+                  id: 132,
+                  authName: '删除用户',
+                  path: 'users',
+                  pid: '110,125'
+                },
+                {
+                  id: 133,
+                  authName: '更新用户',
+                  path: 'users',
+                  pid: '110,125'
+                },
+                {
+                  id: 136,
+                  authName: '获取用户详情',
+                  path: 'users',
+                  pid: '110,125'
+                },
+                {
+                  id: 137,
+                  authName: '分配用户角色',
+                  path: 'users',
+                  pid: '110,125'
+                },
+                {
+                  id: 159,
+                  authName: '设置管理状态',
+                  path: 'users',
+                  pid: '110,125'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 145,
+          authName: '数据统计',
+          path: 'reports',
+          pid: 0,
+          children: [
+            {
+              id: 146,
+              authName: '数据报表',
+              path: 'reports',
+              pid: 145,
+              children: [
+                {
+                  id: 148,
+                  authName: '查看数据',
+                  path: 'reports',
+                  pid: '146,145'
+                }
+              ]
+            }
+          ]
+        }
+      ],
       // 树形控件属性绑定对象
       defaultProps: {
         label: 'authName',
@@ -104,7 +874,7 @@ export default {
       },
       // 树形控件默认选中的checkbox
       defaultCheckedKeys: [],
-      roleId:null
+      roleId: null
     }
   },
   created() {
@@ -145,18 +915,18 @@ export default {
     // 分配权限
     async showAssignRightDialog(row) {
       // 记录需要修改的角色id
-      this.roleId=row.id
+      this.roleId = row.id
       // tree里的内容
       var { data: res } = await this.$axios.get('rights/tree')
       if (res.meta.status !== 200) return this.$message.error('数据获取失败')
       this.rightsList = res.data
       // tree哪些项被勾选
-      this.defaultCheckedKeys=[]
+      this.defaultCheckedKeys = []
       this.getLeafKey(row)
       this.assignRightDialog = true
     },
     getLeafKey(node) {
-      if(!node.children){
+      if (!node.children) {
         return this.defaultCheckedKeys.push(node.id)
       }
       node.children.forEach(item => {
@@ -164,19 +934,22 @@ export default {
       })
     },
     // 点击授权确认按钮
-    async assignRight(){
-      var keys=[
+    async assignRight() {
+      var keys = [
         ...this.$refs.treeRef.getCheckedKeys(),
         ...this.$refs.treeRef.getHalfCheckedKeys()
       ]
-      keys=keys.join(',')
-      var {data:res}= await this.$axios.post(`roles/${this.roleId}/rights`,{
-        rids:keys
-      })
-      if(res.meta.status!==200)return this.$message.error('授权失败')
+      keys = keys.join(',')
+      var { data: res } = await this.$axios.post(
+        `roles/${this.roleId}/rights`,
+        {
+          rids: keys
+        }
+      )
+      if (res.meta.status !== 200) return this.$message.error('授权失败')
       this.getRolesList()
       this.$message.success('授权成功')
-      this.assignRightDialog=false
+      this.assignRightDialog = false
     }
   }
 }

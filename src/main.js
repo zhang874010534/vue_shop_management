@@ -4,9 +4,14 @@ import router from './router'
 import './plugins/element.js'
 // 全局样式
 import './assets/css/global.css'
+
+import ZkTable from 'vue-table-with-tree-grid'
+Vue.use(ZkTable)
+
+
 import axios from 'axios'
-// axios.defaults.baseURL = "http://127.0.0.1:8888/api/private/v1/"
-axios.defaults.baseURL = "https://diandian.ngrok2.xiaomiqiu.cn/api/private/v1/"
+axios.defaults.baseURL = "http://127.0.0.1:8888/api/private/v1/"
+// axios.defaults.baseURL = "https://diandian.ngrok2.xiaomiqiu.cn/api/private/v1/"
 axios.interceptors.request.use((config) => {
   config.headers.Authorization = sessionStorage.getItem('token')
   return config

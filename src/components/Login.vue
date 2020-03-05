@@ -30,7 +30,7 @@ export default {
     return {
       form: {
         username: 'admin',
-        password: ''
+        password: '123456'
       },
       loginRules: {
         username: [
@@ -82,6 +82,7 @@ export default {
         // } else {
         //   data = this.errorRes
         // }
+        console.log(data)
         if (data.meta.status !== 200) return this.$message.error('登录失败')
         this.$message({
           message: '登录成功',
