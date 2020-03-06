@@ -9,11 +9,13 @@
       <el-form ref="form" label-width="0px" class="login_form" :model="form" :rules="loginRules">
         <!-- 帐号 -->
         <el-form-item label prop="username">
-          <el-input prefix-icon="el-icon-user" v-model="form.username"></el-input>
+          <el-input prefix-icon="el-icon-user" v-model="form.username" ref="username" id="username"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item label prop="password">
-          <el-input prefix-icon="el-icon-lock" v-model="form.password" show-password></el-input>
+          <el-input prefix-icon="el-icon-lock" v-model="form.password" show-password
+          @keyup.enter.native="login"
+          ></el-input>
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item label class="btns">
@@ -66,6 +68,15 @@ export default {
       }
     }
   },
+  created() {
+    this.$nextTick(()=>{
+      // dom更新结束之后执行
+      this.$refs.username.focus()
+    })
+    this.showNotification()
+  },
+  mounted() {
+  },
   methods: {
     // 重置表单
     reset() {
@@ -82,7 +93,6 @@ export default {
         // } else {
         //   data = this.errorRes
         // }
-        console.log(data)
         if (data.meta.status !== 200) return this.$message.error('登录失败')
         this.$message({
           message: '登录成功',
@@ -91,6 +101,16 @@ export default {
         sessionStorage.setItem('token', data.data.token)
         this.$router.push('/home')
       })
+    },
+    // 判断服务器是否开启
+    async showNotification() {
+      var { data: res } = await this.$axios.post('login', this.form)
+      if (res.meta.status !== 200) {
+        this.Notification.error({
+          title: '提示',
+          message: '服务器没有开启'
+        })
+      }
     }
   }
 }

@@ -1,10 +1,13 @@
 <template>
   <div>
+    <!-- 面包屑 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>商品管理</el-breadcrumb-item>
       <el-breadcrumb-item>参数列表</el-breadcrumb-item>
     </el-breadcrumb>
+
+    <!-- card部分 -->
     <el-card>
       <el-alert title="注意:只允许为第三级分类设置相关参数！" type="warning" show-icon :closable="false"></el-alert>
       <!-- 选择商品分类区域 -->
@@ -24,7 +27,12 @@
       <!-- tab页签区域 -->
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="动态参数" name="many">
-          <el-button type="primary" size="mini" :disabled="isBtnNeedForbidden">添加参数</el-button>
+          <el-button
+            type="primary"
+            size="mini"
+            :disabled="isBtnNeedForbidden"
+            @click="addDynamicParamsVisbile=true"
+          >添加参数</el-button>
           <el-table :data="manyTableData" border stripe>
             <!-- 展开行 -->
             <el-table-column type="expand"></el-table-column>
@@ -40,7 +48,12 @@
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="静态属性" name="only">
-          <el-button type="primary" size="mini" :disabled="isBtnNeedForbidden">添加属性</el-button>
+          <el-button
+            type="primary"
+            size="mini"
+            :disabled="isBtnNeedForbidden"
+            @click="addDynamicParamsVisbile=true"
+          >添加属性</el-button>
           <!-- 静态属性数据表格 -->
           <el-table :data="onlyTableData" border stripe>
             <!-- 展开行 -->
@@ -58,6 +71,21 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
+
+    <!-- 添加参数的dialog -->
+    <el-dialog :title="dialagTitle" :visible.sync="addDynamicParamsVisbile" width="50%">
+      <!-- 添加参数的表单 -->
+      <el-form :model="paramsForm" :rules="paramsFormRules" ref="paramsForm" label-width="110px">
+        <el-form-item :label="dialagTitle" prop="attr_name">
+          <el-input v-model="paramsForm.attr_name"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <span slot="footer">
+        <el-button @click="addDynamicParamsVisbile = false">取 消</el-button>
+        <el-button type="primary" @click="addParams">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -69,13 +97,27 @@ export default {
       selectedOptions: [], //级联选择框的值
       activeName: 'many', //tab默认值
       manyTableData: [], //动态参数
-      onlyTableData: [] // 静态参数
+      onlyTableData: [], // 静态参数
+      addDynamicParamsVisbile: false, //动态参数是否显示
+      paramsForm: {
+        attr_name:''
+      }, // 表单数据
+      paramsFormRules: {
+        attr_name: [
+          {
+            required: true,
+            message: '请输入参数名称',
+            trigger: 'blur'
+          }
+        ]
+      } // 表单校验规则
     }
   },
   created() {
     this.getCateList()
   },
   methods: {
+    // 商品分类数据
     async getCateList() {
       let { data: res } = await this.$axios.get('categories')
       if (res.meta.status !== 200)
@@ -106,6 +148,20 @@ export default {
       } else {
         this.onlyTableData = res.data
       }
+    },
+    // 点击按钮添加参数
+    addParams(){
+      this.$refs.paramsForm.validate(async valid=>{
+        if(!valid) return 
+        let {data:res} =await this.$axios.post(`categories/${this.cateId}/attributes`,{
+          attr_name:this.paramsForm.attr_name,
+          attr_sel:this.activeName,
+        })
+        if(res.meta.status!==201) return this.$message.error('添加失败')
+        this.$message.success('添加成功')
+        this.addDynamicParamsVisbile=false
+        this.getParamsData()
+      })
     }
   },
   computed: {
@@ -122,6 +178,11 @@ export default {
         return this.selectedOptions[2]
       }
       return null
+    },
+    // dialog的title名称
+    dialagTitle() {
+      if (this.activeName === 'many') return '添加动态参数'
+      return '添加静态属性'
     }
   }
 }
