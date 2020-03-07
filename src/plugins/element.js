@@ -32,7 +32,9 @@ import {
   Alert,
   Tabs,
   TabPane,
-  Notification
+  Notification,
+  Steps,
+  Step
 } from 'element-ui'
 Vue.use(Button)
 Vue.use(Form)
@@ -68,4 +70,6 @@ Vue.use(Alert)
 Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.prototype.Notification=Notification
+Vue.use(Steps)
+Vue.use(Step)
 
