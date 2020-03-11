@@ -45,7 +45,7 @@ const routes = [{
     path: 'goods',
     component: Goods
   }, {
-    path: 'goods/add', 
+    path: 'goods/add',
     component: AddGoods
   }
   ]
@@ -58,7 +58,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/login') return next()
-  var token = sessionStorage.getItem('token')
+  var token = sessionStorage.getItem('token');
   if (!token) return next('/login')
   // 这里应该判断一下token是否正确
   next()

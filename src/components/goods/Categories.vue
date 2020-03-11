@@ -3312,4 +3312,10 @@ export default {
 .zk-table {
   margin-top: 15px;
 }
+/deep/ .el-select-dropdown {
+  background-color: red;
+}
+.el-select-dropdown {
+  background-color: red;
+}
 </style>

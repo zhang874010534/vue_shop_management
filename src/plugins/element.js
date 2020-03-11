@@ -34,7 +34,8 @@ import {
   TabPane,
   Notification,
   Steps,
-  Step
+  Step,
+  Upload
 } from 'element-ui'
 Vue.use(Button)
 Vue.use(Form)
@@ -72,4 +73,5 @@ Vue.use(TabPane)
 Vue.prototype.Notification=Notification
 Vue.use(Steps)
 Vue.use(Step)
+Vue.use(Upload)
 
