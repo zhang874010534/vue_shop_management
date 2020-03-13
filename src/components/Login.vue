@@ -85,20 +85,22 @@ export default {
     login() {
       this.$refs.form.validate(async flag => {
         if (!flag) return
+
         // 这是带服务器的请求
-        var { data } = await this.$axios.post('login', this.form)
-        // var data
-        // if (this.form.username === 'admin' && this.form.password === '123456') {
-        //   data = this.successRes
-        // } else {
-        //   data = this.errorRes
-        // }
-        if (data.meta.status !== 200) return this.$message.error('登录失败')
+        // var { data:res } = await this.$axios.post('login', this.form)
+
+        var res;
+        if (this.form.username === 'admin' && this.form.password === '123456') {
+          res = this.successRes
+        } else {
+          res = this.errorRes
+        }
+        // if (data.meta.status !== 200) return this.$message.error('登录失败')
         this.$message({
           message: '登录成功',
           type: 'success'
         })
-        sessionStorage.setItem('token', data.data.token)
+        sessionStorage.setItem('token', res.data.token)
         this.$router.push('/home')
       })
     },
