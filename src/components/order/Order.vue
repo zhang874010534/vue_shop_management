@@ -285,10 +285,9 @@ export default {
     },
     // 物流进度
     async process() {
+      this.logisticsProcessVisible = true
       let { data: res } = await this.$axios.get('/kuaidi/804909574412544580')
       this.processInfo = res.data
-      this.logisticsProcessVisible = true
-      console.log(this.processInfo)
     }
   }
 }

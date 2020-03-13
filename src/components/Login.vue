@@ -9,7 +9,9 @@
       <el-form ref="form" label-width="0px" class="login_form" :model="form" :rules="loginRules">
         <!-- 帐号 -->
         <el-form-item label prop="username">
-          <el-input prefix-icon="el-icon-user" v-model="form.username" ref="username" id="username"></el-input>
+          <el-input 
+          @keyup.enter.native="login"
+          prefix-icon="el-icon-user" v-model="form.username" ref="username" id="username"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item label prop="password">
