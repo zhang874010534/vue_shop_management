@@ -5,7 +5,6 @@ import './plugins/element.js'
 
 // 全局样式
 import './assets/css/global.css'
-
 // tree table
 import ZkTable from 'vue-table-with-tree-grid'
 Vue.use(ZkTable)
@@ -39,7 +38,6 @@ Vue.filter('dataFormat',function(oldVal){
   let ss=(dt.getSeconds()+'').padStart(2,'0')
   return `${y}-${m}-${d} ${hh}-${mm}-${ss}`
 })
-
 
 new Vue({
   router,

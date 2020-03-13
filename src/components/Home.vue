@@ -27,7 +27,7 @@
               <i :class="iconList[item.id]"></i>
               <span>{{item.authName}}</span>
             </template>
-            <el-menu-item :index="item2.path" v-for="item2 in item.children" :key="item2.id">
+            <el-menu-item :index="'/home/'+item2.path" v-for="item2 in item.children" :key="item2.id">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>{{item2.authName}}</span>
