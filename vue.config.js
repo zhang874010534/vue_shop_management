@@ -3,7 +3,6 @@ module.exports = {
   configureWebpack: {
     externals: {
       vue: 'Vue',
-      'vue-quill-editor': 'VueQuillEditor',
       nprogress: 'NProgress',
       axios: 'axios',
       echarts: 'echarts'
