@@ -76,6 +76,7 @@ export default {
       this.$refs.username.focus()
     })
     this.showNotification()
+    console.log(11)
   },
   mounted() {
   },

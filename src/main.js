@@ -11,19 +11,29 @@ Vue.use(ZkTable)
 
 // 导入富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
-import 'quill/dist/quill.core.css' // import styles
-import 'quill/dist/quill.snow.css' // for snow theme
-import 'quill/dist/quill.bubble.css' // for bubble theme
+// import 'quill/dist/quill.core.css' // import styles
+// import 'quill/dist/quill.snow.css' // for snow theme
+// import 'quill/dist/quill.bubble.css' // for bubble theme
 Vue.use(VueQuillEditor, /* { default global options } */)
+
+// 导入nprogress
+import NProgress from 'nprogress' 
+// import 'nprogress/nprogress.css'
 
 // axios
 import axios from 'axios'
 axios.defaults.baseURL = "http://127.0.0.1:8888/api/private/v1/"
 // axios.defaults.baseURL = "https://diandian.ngrok2.xiaomiqiu.cn/api/private/v1/"
 axios.interceptors.request.use((config) => {
+  NProgress.start()
   config.headers.Authorization = sessionStorage.getItem('token')
   return config
 })
+axios.interceptors.response.use((response)=>{
+  NProgress.done()
+  return response
+})
+
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
