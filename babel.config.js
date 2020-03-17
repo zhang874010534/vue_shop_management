@@ -15,6 +15,7 @@ module.exports = {
         styleLibraryName: 'theme-chalk'
       }
     ],
+    ["@babel/plugin-syntax-dynamic-import"]
     // 在这里用展开运算符放入
     // ...prodPlugins
   ]
