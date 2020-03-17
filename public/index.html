@@ -6,10 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <title><%= htmlWebpackPlugin.options.demo %></title>
+  <!-- htmlWebpackPlugin对象在vue.config.js里可以设置 这个是webpack的插件 -->
 
+  
   <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
-  <!--  -->
+
+  <!-- 引入elementui样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 
 <body>
@@ -33,6 +37,10 @@
 
   <!-- axios -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+   <!-- 引入elementui组件库 -->
+   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
 </body>
 
 </html>
